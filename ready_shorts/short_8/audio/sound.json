@@ -1,0 +1,24 @@
+{
+  "music": {
+    "track": "synth_pulse",
+    "vol": 0.22,
+    "duck": 0.08
+  },
+  "cues": [
+    { "t": 0.05, "kind": "whoosh", "vol": 0.4 },
+    { "t": 3.8, "kind": "sparkle", "vol": 0.5 },
+    { "t": 7.8, "kind": "whoosh", "vol": 0.6 },
+    { "t": 9.4, "kind": "click", "vol": 0.4 },
+    { "t": 11.4, "kind": "ding", "vol": 0.5 },
+    { "t": 13.6, "kind": "whoosh", "vol": 0.6 },
+    { "t": 15.2, "kind": "tick", "vol": 0.4 },
+    { "t": 18.2, "kind": "whoosh", "vol": 0.6 },
+    { "t": 19.8, "kind": "buzz", "vol": 0.35 },
+    { "t": 22.8, "kind": "riser", "vol": 0.5 },
+    { "t": 24.5, "kind": "chime", "vol": 0.6 },
+    { "t": 28.0, "kind": "pop", "vol": 0.45 },
+    { "t": 30.2, "kind": "drum", "vol": 0.55 },
+    { "t": 32.8, "kind": "whoosh", "vol": 0.6 },
+    { "t": 34.2, "kind": "ding", "vol": 0.5 }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "music": {
+    "preset": "heist_stealth",
+    "bpm": 122,
+    "volume": 0.32
+  },
+  "sfx": [
+    { "word": "airport", "preset": "whoosh", "volume": 0.6 },
+    { "word": "dollars.", "preset": "impact", "volume": 0.7 },
+    { "word": "Noroeste.", "preset": "glitch", "volume": 0.6 },
+    { "word": "kickbacks.", "preset": "bell", "volume": 0.7 },
+    { "word": "accounts.", "preset": "impact", "volume": 0.7 },
+    { "word": "map.", "preset": "whoosh", "volume": 0.6 },
+    { "word": "history.", "preset": "impact", "volume": 0.8 }
+  ]
+}

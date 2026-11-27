@@ -1,0 +1,16 @@
+{
+  "music": {
+    "preset": "heist_stealth",
+    "bpm": 120,
+    "volume": 0.32
+  },
+  "sfx": [
+    { "word": "syrup", "preset": "whoosh", "volume": 0.6 },
+    { "word": "barrels,", "preset": "impact", "volume": 0.7 },
+    { "word": "water,", "preset": "splash", "volume": 0.6 },
+    { "word": "fell", "preset": "impact", "volume": 0.7 },
+    { "word": "empty.", "preset": "whoosh", "volume": 0.6 },
+    { "word": "mafia.", "preset": "glitch", "volume": 0.6 },
+    { "word": "recorded.", "preset": "impact", "volume": 0.8 }
+  ]
+}

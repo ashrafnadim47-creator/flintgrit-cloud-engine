@@ -1,0 +1,16 @@
+{
+  "music": {
+    "preset": "heist_stealth",
+    "bpm": 120,
+    "volume": 0.32
+  },
+  "sfx": [
+    { "word": "hairspray.", "preset": "whoosh", "volume": 0.6 },
+    { "word": "vault", "preset": "impact", "volume": 0.7 },
+    { "word": "thermal", "preset": "glitch", "volume": 0.6 },
+    { "word": "steel", "preset": "impact", "volume": 0.7 },
+    { "word": "diamonds", "preset": "bell", "volume": 0.7 },
+    { "word": "bullet", "preset": "whoosh", "volume": 0.6 },
+    { "word": "history.", "preset": "impact", "volume": 0.8 }
+  ]
+}

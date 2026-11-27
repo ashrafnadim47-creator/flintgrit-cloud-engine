@@ -59,23 +59,49 @@ def main():
     short_dir.mkdir(parents=True, exist_ok=True)
 
     # AUTO-PILOT ENGINE SELECTION:
-    # Autonomous Gemini 3D Architect is the PRIMARY engine.
-    # Pre-authored static ready_shorts are ONLY used if explicitly requested with a specific legacy short number (< 9).
-    use_preauthored = False
-    if str(args.short).isdigit() and int(args.short) < 9:
-        candidate_dir = REPO_ROOT / "ready_shorts" / f"short_{args.short}"
-        if candidate_dir.exists() and (candidate_dir / "script.md").exists():
-            use_preauthored = True
+    history_file = REPO_ROOT / "history_shadow_will.json"
+    history = []
+    if history_file.exists():
+        try:
+            history = json.loads(history_file.read_text(encoding="utf-8"))
+        except Exception:
+            history = []
 
-    if use_preauthored:
-        candidate_dir = REPO_ROOT / "ready_shorts" / f"short_{args.short}"
+    use_preauthored = False
+    candidate_dir = None
+
+    if str(args.short).isdigit():
+        req_dir = REPO_ROOT / "ready_shorts" / f"short_{args.short}"
+        if req_dir.exists() and (req_dir / "script.md").exists():
+            candidate_dir = req_dir
+            use_preauthored = True
+    elif args.short == "auto":
+        ready_root = REPO_ROOT / "ready_shorts"
+        if ready_root.exists():
+            avail_shorts = sorted(list(ready_root.glob("short_*")), key=lambda p: int(p.name.split("_")[-1]) if p.name.split("_")[-1].isdigit() else 999)
+            unvisited_shorts = [s for s in avail_shorts if s.name not in history and s.name != "short_auto"]
+            if unvisited_shorts:
+                candidate_dir = unvisited_shorts[0]
+                use_preauthored = True
+                print(f"[AutoPilot] Selected Unvisited 3D Story from Ready Shorts Queue: {candidate_dir.name}")
+
+    if use_preauthored and candidate_dir and candidate_dir.exists():
         for f in ["script.md", "seo.md", "story.js"]:
             if (candidate_dir / f).exists():
                 shutil.copy2(candidate_dir / f, short_dir / f)
         if (candidate_dir / "audio" / "sound.json").exists():
             (short_dir / "audio").mkdir(exist_ok=True, parents=True)
             shutil.copy2(candidate_dir / "audio" / "sound.json", short_dir / "audio" / "sound.json")
-        print(f"[AutoPilot] Successfully staged pre-authored Short #{args.short} into current_short")
+
+        if candidate_dir.name not in history:
+            history.append(candidate_dir.name)
+            try:
+                history_file.write_text(json.dumps(history, indent=2), encoding="utf-8")
+                print(f"[AutoPilot] Recorded '{candidate_dir.name}' into history_shadow_will.json")
+            except Exception as e:
+                print(f"[AutoPilot Note] Could not save history: {e}")
+
+        print(f"[AutoPilot] Successfully staged 3D Short {candidate_dir.name} into current_short!")
     else:
         print("[AutoPilot] Activating Upgraded Autonomous Gemini 3D Architect Engine...")
         sys.path.insert(0, str(HERE / "scripts"))
@@ -93,13 +119,6 @@ def main():
             "The Great Canadian Maple Syrup Heist: Stealing $18M of Liquid Gold",
             "The Incredible True Story of the Greenbrier Secret Bunker for US Congress"
         ]
-        history_file = REPO_ROOT / "history_shadow_will.json"
-        history = []
-        if history_file.exists():
-            try:
-                history = json.loads(history_file.read_text(encoding="utf-8"))
-            except Exception:
-                history = []
 
         unvisited = [t for t in VIRAL_TOPICS if t not in history]
         if not unvisited:

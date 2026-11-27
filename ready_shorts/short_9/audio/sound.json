@@ -1,0 +1,33 @@
+{
+  "bed": {
+    "lead": "kalimba",
+    "harmony": "pad",
+    "tempo": 118,
+    "root": "D3",
+    "scale": "minor",
+    "gain": 0.12,
+    "sections": [
+      { "name": "intro", "bars": 2, "drums": false },
+      { "name": "build", "bars": 4, "drums": true },
+      { "name": "tense", "bars": 4, "drums": true },
+      { "name": "climax", "bars": 4, "drums": true },
+      { "name": "outro", "bars": 2, "drums": false }
+    ]
+  },
+  "sfx": [
+    { "word": "escaped", "kind": "whoosh", "gain": 0.4 },
+    { "word": "fortress", "kind": "impact", "gain": 0.5 },
+    { "word": "spoons.", "kind": "pop", "gain": 0.45 },
+    { "word": "scraped", "kind": "riser", "gain": 0.35 },
+    { "word": "vents.", "kind": "click", "gain": 0.3 },
+    { "word": "guards", "kind": "impact", "gain": 0.4 },
+    { "word": "dummy", "kind": "chime", "gain": 0.4 },
+    { "word": "beds,", "kind": "pop", "gain": 0.35 },
+    { "word": "corridor", "kind": "whoosh", "gain": 0.35 },
+    { "word": "shoreline,", "kind": "sparkle", "gain": 0.35 },
+    { "word": "raft", "kind": "impact", "gain": 0.45 },
+    { "word": "vanished", "kind": "whoosh", "gain": 0.45 },
+    { "word": "FBI", "kind": "impact", "gain": 0.5 },
+    { "word": "impossible.", "kind": "ding", "gain": 0.55 }
+  ]
+}
