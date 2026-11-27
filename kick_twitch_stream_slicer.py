@@ -16,12 +16,10 @@ TWITCH_GTA_CHANNELS = [
     "lord_kebun",
     "summit1g",
     "darkviperau",
-    "xqc",
-    "zerkaa",
-    "fuslie",
     "anthonyz",
     "ratedepicz",
-    "moistcr1tikal",
+    "zerkaa",
+    "fuslie",
 ]
 
 KICK_GTA_CHANNELS = [
@@ -155,24 +153,48 @@ def slice_fresh_kick_or_twitch_clip(out_mp4: str, history: list, clip_len: int =
     random.shuffle(pool)
 
     for cand in pool[:4]:
-        dur = max(120, cand["duration"])
-        # Pick a random high-energy middle segment (20% to 80% into the stream)
-        start_sec = random.randint(int(dur * 0.2), max(int(dur * 0.2) + 10, int(dur * 0.8) - clip_len))
-        end_sec = start_sec + clip_len
-        print(f"[StreamSlicer] Slicing {cand['source'].upper()} '{cand['channel']}' ({start_sec}s-{end_sec}s): {cand['title']}")
+        dur = max(180, cand["duration"])
+        # Pick mid-stream (35%-75%) where actual GTA gameplay happens, download 90s candidate & extract loudest 28s peak (autoclip style)
+        win_start = random.randint(int(dur * 0.35), max(int(dur * 0.35) + 10, int(dur * 0.75) - 90))
+        win_end = win_start + 90
+        tmp_90s = str(Path(out_mp4).with_name("tmp_90s_scan.mp4"))
+        print(f"[StreamSlicer] Scanning {cand['source'].upper()} '{cand['channel']}' ({win_start}s-{win_end}s) for peak action: {cand['title']}")
 
         cmd = [
             "yt-dlp",
             "--no-warnings",
             "-f", "best[height<=1080]/best",
-            "--download-sections", f"*{start_sec}-{end_sec}",
+            "--download-sections", f"*{win_start}-{win_end}",
             "--force-keyframes-at-cuts",
-            "-o", out_mp4,
+            "-o", tmp_90s,
             cand["url"],
         ]
         try:
             res = subprocess.run(cmd, capture_output=True, text=True, timeout=180)
-            if res.returncode == 0 and Path(out_mp4).exists() and Path(out_mp4).stat().st_size > 200_000:
+            if res.returncode == 0 and Path(tmp_90s).exists() and Path(tmp_90s).stat().st_size > 200_000:
+                # Find loudest 28s window using ffmpeg volumedetect / astats per 10s bucket
+                best_offset = 20
+                best_db = -99.0
+                for off in [0, 15, 30, 45, 60]:
+                    vf = subprocess.run(
+                        ["ffmpeg", "-v", "error", "-ss", str(off), "-t", "28", "-i", tmp_90s, "-af", "volumedetect", "-f", "null", "-"],
+                        capture_output=True, text=True
+                    )
+                    for line in vf.stderr.splitlines():
+                        if "mean_volume:" in line:
+                            try:
+                                db = float(line.split("mean_volume:")[1].split("dB")[0].strip())
+                                if db > best_db:
+                                    best_db = db
+                                    best_offset = off
+                            except Exception:
+                                pass
+                subprocess.run(
+                    ["ffmpeg", "-v", "error", "-y", "-ss", str(best_offset), "-t", str(clip_len), "-i", tmp_90s, "-c", "copy", out_mp4],
+                    check=True,
+                )
+                Path(tmp_90s).unlink(missing_ok=True)
+            if Path(out_mp4).exists() and Path(out_mp4).stat().st_size > 200_000:
                 ai_meta = _generate_gemini_gta_metadata(cand["channel"], cand["title"], cand["source"])
                 meta = {
                     "id": cand["id"],
