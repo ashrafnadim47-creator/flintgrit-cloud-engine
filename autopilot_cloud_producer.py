@@ -284,8 +284,12 @@ def upload_to_youtube(video_path, story):
         )
         print("[YouTube Uploader] Successfully uploaded directly to PUBLIC feed! Video ID:", res.get("id"))
 
-        # Facebook & Instagram are strictly reserved for Chronicle Vault (History) niche to keep audience pure
-        print("[Niche Guard] Keeping Facebook & Instagram focused exclusively on Chronicle Vault History.")
+        # Auto Cross-Post to Facebook Reels
+        try:
+            from meta_reels_publisher import publish_facebook_reel
+            publish_facebook_reel(video_path, caption=f"{story['yt_title']}\n\n{story['description'][:200]}")
+        except Exception as meta_err:
+            print(f"[Meta Reels Cross-Post] Note: {meta_err}")
 
         return True
     except Exception as e:
@@ -340,7 +344,7 @@ def get_channel_performance_memory():
         return "Focus on viral late-night phone addiction, procrastination and quiet discipline."
 
 def generate_dynamic_gemini_story():
-    api_key = os.environ.get("GEMINI_API_KEY")
+    api_key = os.environ.get("GEMINI_API_KEY", "")
     if not api_key:
         print("[Gemini Brain] No GEMINI_API_KEY found, falling back to curated psychological catalog.")
         return None

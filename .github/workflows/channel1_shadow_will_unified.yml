@@ -1,0 +1,92 @@
+name: Channel 1 - Shadow Will (Subah Short & Shaam Long-Form)
+
+on:
+  schedule:
+    # Subah 08:30 AM IST (03:00 UTC) - Viral 9:16 Short (Psychology / Inner Enemy / 3D Story)
+    - cron: '0 3 * * *'
+    # Shaam 06:30 PM IST (13:00 UTC) - High-Retention Long-Form Animated Film (Kaz Deep Psychological Story)
+    - cron: '0 13 * * *'
+  workflow_dispatch:
+    inputs:
+      format:
+        description: 'Format to produce (short or long or auto)'
+        required: true
+        default: 'auto'
+        type: choice
+        options:
+          - auto
+          - short
+          - long
+
+jobs:
+  produce_shadow_will:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Set up Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install System Dependencies (FFmpeg & Fonts)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg fontconfig fonts-freefont-ttf fonts-dejavu-core
+
+      - name: Install Python Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install edge-tts numpy pillow scipy requests google-api-python-client google-auth-oauthlib
+
+      - name: Run Shadow Will Unified Dual Engine (Subah Short / Shaam Long)
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          META_PAGE_TOKEN: ${{ secrets.META_PAGE_TOKEN }}
+          META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN || secrets.META_PAGE_TOKEN }}
+          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+        run: |
+          CURRENT_HOUR=$(date -u +%H)
+          USER_FORMAT="${{ github.event.inputs.format }}"
+
+          if [ "$USER_FORMAT" = "short" ] || { [ "$USER_FORMAT" = "auto" ] && [ "$CURRENT_HOUR" -lt "8" ]; }; then
+            echo "=== [SUBAH CYCLE] PRODUCING SHADOW WILL 9:16 PSYCHOLOGICAL SHORT ==="
+            python3 kaz_story_producer.py --format short || python3 autopilot_cloud_producer.py
+          else
+            echo "=== [SHAAM CYCLE] PRODUCING SHADOW WILL LONG-FORM ANIMATED FILM ==="
+            python3 kaz_story_producer.py --format long
+          fi
+
+      - name: Persist Shadow Will Topic History
+        if: always()
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add history_shadow_will.json || true
+          git commit -m "Auto-persist Shadow Will story history [skip ci]" || echo "No history changes"
+          git pull --rebase origin main || true
+          git push origin main || echo "Push skipped"
+
+      - name: Archive Shadow Will Output
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: shadow-will-output
+          path: |
+            *.mp4
+            history_shadow_will.json
+          retention-days: 7
