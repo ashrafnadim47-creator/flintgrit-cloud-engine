@@ -4,7 +4,7 @@ Each story has a unique ID, title, description, tags, mood, script, and complete
 """
 from pathlib import Path
 
-SOLDIER_STORY_PATH = Path(__file__).resolve().parent.parent.parent / "cartoon-short-kit" / "example" / "soldier" / "story.js"
+SOLDIER_STORY_PATH = Path(__file__).resolve().parent / "soldier_story.js"
 
 CHOCOLATE_HEIST_JS = r"""
 export const FPS = 30, TOTAL = 600, DECK = 0;
