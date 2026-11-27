@@ -25,7 +25,7 @@ import subprocess
 BASE_DIR = pathlib.Path(__file__).resolve().parent
 KAZ_DIR = BASE_DIR / "kaz_engine"
 RENDER_SCRIPT = KAZ_DIR / "scripts" / "render.py"
-GEMINI_KEY = os.environ.get("GEMINI_API_KEY")
+GEMINI_KEY = os.environ.get("GEMINI_API_KEY", "")
 
 VALID_SETS = ["bedroom", "couch", "desk", "mirror", "gym", "city", "stairs", "hill", "street_rain", "clock_closeup", "spotlight"]
 VALID_PALETTES = ["night", "cold", "dawn", "sunset", "warm", "rain", "black", "cyberpunk", "emerald", "golden", "ice", "crimson_abyss", "tokyo_neon", "thunder"]

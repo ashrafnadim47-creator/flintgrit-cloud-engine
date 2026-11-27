@@ -1,0 +1,404 @@
+{
+  "title": "THE 3:00 AM GLOW",
+  "niche": "screen addiction / digital dopamine",
+  "enemy_name": "Scroll",
+  "scenes": [
+    {
+      "set": "black",
+      "palette": "black",
+      "duration": 3.5,
+      "caption": "It always starts the same way.",
+      "caption_pos": "center",
+      "music": "dark"
+    },
+    {
+      "set": "bedroom",
+      "palette": "night",
+      "duration": 4.5,
+      "clock": "11:45",
+      "day": "DAY 1",
+      "hero": {
+        "x": 380,
+        "pose": "lie",
+        "mood": "neutral",
+        "phone": true
+      },
+      "shadow": {
+        "x": 860,
+        "scale": 1.0,
+        "behind": true
+      },
+      "caption": "Just five minutes to wind down.",
+      "music": "dark",
+      "sfx": [
+        {
+          "name": "whoosh",
+          "at": 0.5
+        }
+      ]
+    },
+    {
+      "set": "bedroom",
+      "palette": "night",
+      "duration": 4.5,
+      "clock": "12:30",
+      "hero": {
+        "x": 380,
+        "pose": "lie",
+        "mood": "tired",
+        "phone": true
+      },
+      "shadow": {
+        "x": 780,
+        "scale": 1.25,
+        "behind": true
+      },
+      "whisper": "just one more reel.",
+      "music": "dark"
+    },
+    {
+      "set": "couch",
+      "palette": "night",
+      "duration": 4.0,
+      "hero": {
+        "x": 520,
+        "pose": "slump",
+        "mood": "tired",
+        "phone": true
+      },
+      "shadow": {
+        "x": 780,
+        "scale": 1.35
+      },
+      "whisper": "you worked hard today.",
+      "music": "dark"
+    },
+    {
+      "set": "bedroom",
+      "palette": "cold",
+      "duration": 4.5,
+      "clock": "1:45",
+      "hero": {
+        "x": 380,
+        "pose": "lie",
+        "mood": "tired",
+        "phone": true
+      },
+      "meter": {
+        "label": "SLEEP BATTERY",
+        "from": 45,
+        "to": 15
+      },
+      "shadow": {
+        "x": 720,
+        "scale": 1.45
+      },
+      "whisper": "you deserve this comfort.",
+      "sfx": [
+        {
+          "name": "whoosh",
+          "at": 1.0
+        }
+      ],
+      "music": "tense"
+    },
+    {
+      "set": "desk",
+      "palette": "night",
+      "duration": 4.5,
+      "hero": {
+        "x": 640,
+        "pose": "slump",
+        "mood": "tired",
+        "phone": true
+      },
+      "shadow": {
+        "x": 400,
+        "scale": 1.55
+      },
+      "whisper": "nothing waits for you tomorrow.",
+      "music": "tense"
+    },
+    {
+      "set": "empty",
+      "palette": "cold",
+      "duration": 4.0,
+      "hero": {
+        "x": 640,
+        "pose": "stand",
+        "mood": "scared",
+        "phone": true
+      },
+      "shadow": {
+        "x": 880,
+        "scale": 1.65
+      },
+      "whisper": "you don't have the discipline.",
+      "sfx": [
+        {
+          "name": "hit",
+          "at": 1.2
+        }
+      ],
+      "music": "tense"
+    },
+    {
+      "set": "mirror",
+      "palette": "night",
+      "duration": 5.0,
+      "cracked": true,
+      "hero": {
+        "x": 480,
+        "pose": "stand",
+        "mood": "sad",
+        "phone": true
+      },
+      "shadow": {
+        "x": 760,
+        "scale": 1.7,
+        "behind": false
+      },
+      "whisper": "you're just a spectator.",
+      "whisper_xy": [
+        640,
+        140
+      ],
+      "whisper_size": 42,
+      "sfx": [
+        {
+          "name": "boom",
+          "at": 0.2
+        }
+      ],
+      "music": "tense"
+    },
+    {
+      "set": "clock_closeup",
+      "palette": "black",
+      "duration": 3.0,
+      "clock": "3:00",
+      "alarm": true,
+      "zoom": [
+        1,
+        1.2
+      ],
+      "sfx": [
+        {
+          "name": "alarm",
+          "at": 0.1
+        }
+      ],
+      "music": "tense"
+    },
+    {
+      "set": "spotlight",
+      "palette": "black",
+      "duration": 4.5,
+      "caption": "Rock bottom has a blue glow.",
+      "hero": {
+        "x": 640,
+        "pose": "curl",
+        "mood": "sad"
+      },
+      "shadow": {
+        "x": 920,
+        "scale": 1.8
+      },
+      "whisper": "quit.",
+      "whisper_xy": [
+        720,
+        130
+      ],
+      "whisper_size": 46,
+      "music": "silent"
+    },
+    {
+      "set": "spotlight",
+      "palette": "black",
+      "duration": 5.0,
+      "caption": "The screen didn't trap you. Your hands did.",
+      "hero": {
+        "x": 640,
+        "pose": "curl",
+        "mood": "determined"
+      },
+      "music": "silent"
+    },
+    {
+      "set": "bedroom",
+      "palette": "night",
+      "duration": 3.5,
+      "clock": "3:07",
+      "day": "DAY 1.",
+      "day_big": true,
+      "hero": {
+        "x": 420,
+        "pose": "stand",
+        "mood": "determined",
+        "headband": true
+      },
+      "flash": true,
+      "sfx": [
+        {
+          "name": "boom",
+          "at": 0.2
+        }
+      ],
+      "music": "hope"
+    },
+    {
+      "set": "gym",
+      "palette": "night",
+      "duration": 4.5,
+      "hero": {
+        "x": 640,
+        "pose": "pushup",
+        "mood": "determined",
+        "headband": true
+      },
+      "meter": {
+        "label": "DISCIPLINE",
+        "from": 10,
+        "to": 40
+      },
+      "shadow": {
+        "x": 1020,
+        "scale": 1.3
+      },
+      "whisper": "pick it up.",
+      "caption": "Move the body. The mind follows.",
+      "sfx": [
+        {
+          "name": "hit",
+          "at": 0.8
+        },
+        {
+          "name": "hit",
+          "at": 2.2
+        }
+      ],
+      "music": "hope"
+    },
+    {
+      "set": "gym",
+      "palette": "night",
+      "duration": 4.0,
+      "hero": {
+        "x": 640,
+        "pose": "punch",
+        "mood": "angry",
+        "headband": true
+      },
+      "shadow": {
+        "x": 980,
+        "scale": 0.95
+      },
+      "sfx": [
+        {
+          "name": "hit",
+          "at": 0.5
+        },
+        {
+          "name": "hit",
+          "at": 1.8
+        }
+      ],
+      "music": "hope"
+    },
+    {
+      "set": "desk",
+      "palette": "warm",
+      "duration": 4.5,
+      "hero": {
+        "x": 640,
+        "pose": "sit",
+        "mood": "determined",
+        "headband": true
+      },
+      "meter": {
+        "label": "FOCUS",
+        "from": 30,
+        "to": 75
+      },
+      "caption": "Starve the shadow. Feed the spine.",
+      "music": "hope"
+    },
+    {
+      "set": "stairs",
+      "palette": "night",
+      "duration": 5.0,
+      "day": "DAY 30",
+      "caption": "Motivation gets you started. Habits keep you going.",
+      "hero": {
+        "x": 300,
+        "to_x": 760,
+        "pose": "walk",
+        "mood": "determined",
+        "headband": true,
+        "on_stairs": true
+      },
+      "meter": {
+        "label": "DOPAMINE RESET",
+        "from": 30,
+        "to": 85
+      },
+      "music": "hope"
+    },
+    {
+      "set": "hill",
+      "palette": "sunset",
+      "duration": 5.0,
+      "caption": "Nobody is coming to save your time. Save it yourself.",
+      "hero": {
+        "x": 640,
+        "pose": "stand",
+        "mood": "happy",
+        "headband": true,
+        "ground": 480,
+        "aura": [
+          255,
+          170,
+          90
+        ]
+      },
+      "sparks": true,
+      "music": "hope"
+    },
+    {
+      "set": "bedroom",
+      "palette": "dawn",
+      "duration": 4.5,
+      "sky": "dawn",
+      "clock": "6:00",
+      "hero": {
+        "x": 420,
+        "pose": "stand",
+        "mood": "happy",
+        "headband": true
+      },
+      "shadow": {
+        "x": 180,
+        "scale": 0.4,
+        "eyes": false
+      },
+      "caption": "It never disappears. You just grow taller.",
+      "music": "hope"
+    },
+    {
+      "set": "title",
+      "palette": "black",
+      "duration": 6.0,
+      "title": "AWAKE",
+      "sub": "The bedroom is a battlefield.",
+      "punch": "Put the glass down.",
+      "sfx": [
+        {
+          "name": "boom",
+          "at": 0.1
+        }
+      ],
+      "music": "warm",
+      "fade_out": 1.0
+    }
+  ]
+}
