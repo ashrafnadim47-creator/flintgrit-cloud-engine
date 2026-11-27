@@ -47,7 +47,8 @@ jobs:
       - name: Install Python Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install edge-tts numpy pillow scipy requests google-api-python-client google-auth-oauthlib
+          pip install edge-tts numpy pillow scipy requests google-api-python-client google-auth-oauthlib playwright
+          python -m playwright install chromium --with-deps || python -m playwright install chromium
 
       - name: Run Shadow Will Unified Dual Engine (Subah Short / Shaam Long)
         env:
@@ -64,8 +65,8 @@ jobs:
           USER_FORMAT="${{ github.event.inputs.format }}"
 
           if [ "$USER_FORMAT" = "short" ] || { [ "$USER_FORMAT" = "auto" ] && [ "$CURRENT_HOUR" -lt "8" ]; }; then
-            echo "=== [SUBAH CYCLE] PRODUCING SHADOW WILL 9:16 PSYCHOLOGICAL SHORT ==="
-            python3 kaz_story_producer.py --format short || python3 autopilot_cloud_producer.py
+            echo "=== [SUBAH CYCLE] PRODUCING SHADOW WILL MERGED 3D+2D SHORT ==="
+            python3 shadow_will_merged/shadow_will_merged_producer.py --format short
           else
             echo "=== [SHAAM CYCLE] PRODUCING SHADOW WILL LONG-FORM ANIMATED FILM ==="
             python3 kaz_story_producer.py --format long
