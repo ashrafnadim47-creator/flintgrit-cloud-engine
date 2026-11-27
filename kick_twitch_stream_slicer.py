@@ -147,6 +147,14 @@ def slice_fresh_kick_or_twitch_clip(out_mp4: str, history: list, clip_len: int =
         print("[StreamSlicer] No Kick/Twitch VOD candidates found.")
         return None
 
+    # Strict GTA filter: only keep VODs that are actually GTA / NoPixel / RP
+    gta_kw = ("gta", "grand theft auto", "nopixel", "vice city", "los santos", "gtarp", "gta rp")
+    gta_only = [c for c in candidates if any(k in (c.get("title") or "").lower() for k in gta_kw)]
+    if gta_only:
+        candidates = gta_only
+    else:
+        print("[StreamSlicer] Warning: no strict GTA title match in current batch; using fallback.")
+
     # Filter out already used VODs
     unseen = [c for c in candidates if c["id"] not in history]
     pool = unseen if unseen else candidates
