@@ -284,14 +284,8 @@ def upload_to_youtube(video_path, story):
         )
         print("[YouTube Uploader] Successfully uploaded directly to PUBLIC feed! Video ID:", res.get("id"))
 
-        # Auto Cross-Post to Facebook & Instagram Reels
-        try:
-            from meta_reels_publisher import publish_facebook_reel, publish_instagram_reel
-            cap = f"{story['yt_title']}\n\n{story['description'][:200]}"
-            publish_facebook_reel(video_path, caption=cap)
-            publish_instagram_reel(video_path, caption=cap)
-        except Exception as meta_err:
-            print(f"[Meta Reels Cross-Post] Note: {meta_err}")
+        # Facebook & Instagram are strictly reserved for Chronicle Vault (History) niche to keep audience pure
+        print("[Niche Guard] Keeping Facebook & Instagram focused exclusively on Chronicle Vault History.")
 
         return True
     except Exception as e:
