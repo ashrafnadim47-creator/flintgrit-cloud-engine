@@ -236,12 +236,15 @@ def main():
     save_history(hfile, history, story["id"])
 
     if not args.no_upload and youtube_cloud_uploader and os.environ.get("YT_REFRESH_TOKEN"):
-        youtube_cloud_uploader.upload_video_to_youtube(
+        youtube_cloud_uploader.upload_video_file(
             str(out_mp4),
             story["title"],
             story["description"],
             story.get("tags", ["shorts", "animation"]),
-            privacy="public",
+            os.environ["YT_CLIENT_ID"],
+            os.environ["YT_CLIENT_SECRET"],
+            os.environ["YT_REFRESH_TOKEN"],
+            privacy_status="public",
         )
 
 
