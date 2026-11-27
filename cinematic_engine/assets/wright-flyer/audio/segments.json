@@ -1,0 +1,137 @@
+{
+ "segments": [
+  {
+   "id": 1,
+   "scene": "T01_cold_open",
+   "caption": "December 17th, 1903. A windy beach in North Carolina.",
+   "vo": "December seventeenth, nineteen oh three. A windy beach in North Carolina.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 2,
+   "scene": "T01_cold_open",
+   "caption": "A machine of spruce and cloth leaves the sand.",
+   "vo": "A machine of spruce and cloth leaves the sand.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 3,
+   "scene": "T01_cold_open",
+   "caption": "Twelve seconds. One hundred and twenty feet.",
+   "vo": "Twelve seconds. One hundred and twenty feet.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 4,
+   "scene": "T01_cold_open",
+   "caption": "The man who took this picture had never taken one before.",
+   "vo": "The man who took this picture had never taken one before.",
+   "gap_after": 1.2
+  },
+  {
+   "id": 5,
+   "scene": "T02_dayton",
+   "caption": "Four years earlier, two brothers ran a bicycle shop in Dayton, Ohio.",
+   "vo": "Four years earlier, two brothers ran a bicycle shop in Dayton, Ohio.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 6,
+   "scene": "T02_dayton",
+   "caption": "Wilbur and Orville Wright. Neither had a high school diploma.",
+   "vo": "Wilbur and Orville Wright. Neither had a high school diploma.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 7,
+   "scene": "T02_dayton",
+   "caption": "In 1899, Wilbur wrote to the Smithsonian for everything it had on flight.",
+   "vo": "In eighteen ninety-nine, Wilbur wrote to the Smithsonian for everything it had on flight.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 8,
+   "scene": "T02_dayton",
+   "caption": "I am an enthusiast, he wrote, but not a crank.",
+   "vo": "I am an enthusiast, he wrote, but not a crank.",
+   "gap_after": 1.0
+  },
+  {
+   "id": 9,
+   "scene": "T03_the_rival",
+   "caption": "The man in charge there, Samuel Langley, was building a flying machine of his own.",
+   "vo": "The man in charge there, Samuel Langley, was building a flying machine of his own.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 10,
+   "scene": "T03_the_rival",
+   "caption": "The War Department gave him fifty thousand dollars.",
+   "vo": "The War Department gave him fifty thousand dollars.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 11,
+   "scene": "T03_the_rival",
+   "caption": "On October 7th, 1903, it launched from a houseboat on the Potomac, and dropped straight into the river.",
+   "vo": "On October seventh, nineteen oh three, it launched from a houseboat on the Potomac, and dropped straight into the river.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 12,
+   "scene": "T03_the_rival",
+   "caption": "Two days later, The New York Times said a real flying machine might take one to ten million years.",
+   "vo": "Two days later, The New York Times said a real flying machine might take one to ten million years.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 13,
+   "scene": "T03_the_rival",
+   "caption": "On December 8th, Langley tried again. Same river. Same result.",
+   "vo": "On December eighth, Langley tried again. Same river. Same result.",
+   "gap_after": 1.0
+  },
+  {
+   "id": 14,
+   "scene": "T04_kitty_hawk",
+   "caption": "Nine days later, the Wright brothers were back on that beach.",
+   "vo": "Nine days later, the Wright brothers were back on that beach.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 15,
+   "scene": "T04_kitty_hawk",
+   "caption": "Their whole effort had cost less than a thousand dollars.",
+   "vo": "Their whole effort had cost less than a thousand dollars.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 16,
+   "scene": "T04_kitty_hawk",
+   "caption": "Orville flew first. By noon, Wilbur stayed up for fifty-nine seconds.",
+   "vo": "Orville flew first. By noon, Wilbur stayed up for fifty-nine seconds.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 17,
+   "scene": "T04_kitty_hawk",
+   "caption": "They wired their father: Success. Four flights. Home for Christmas.",
+   "vo": "They wired their father. Success. Four flights. Home for Christmas.",
+   "gap_after": 1.0
+  },
+  {
+   "id": 18,
+   "scene": "T05_close",
+   "caption": "The government spent fifty thousand dollars, and got a wreck in a river.",
+   "vo": "The government spent fifty thousand dollars, and got a wreck in a river.",
+   "gap_after": 0.45
+  },
+  {
+   "id": 19,
+   "scene": "T05_close",
+   "caption": "Two bicycle mechanics spent less than a thousand, and got the sky.",
+   "vo": "Two bicycle mechanics spent less than a thousand, and got the sky.",
+   "gap_after": 1.0
+  }
+ ]
+}

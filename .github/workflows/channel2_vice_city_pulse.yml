@@ -1,0 +1,84 @@
+name: Channel 2 - Vice City Pulse Daily GTA Shorts (1:00 PM IST)
+
+on:
+  schedule:
+    - cron: '28 7 * * *'
+  workflow_dispatch:
+    inputs:
+      custom_stream_url:
+        description: 'Optional: Specific YouTube Stream/Video URL (leave blank for 100% autonomous auto-hunt)'
+        required: false
+        default: ''
+      upload_to_youtube:
+        description: 'Publish directly to YouTube'
+        required: false
+        default: 'true'
+
+jobs:
+  produce_gta_short:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Setup Node.js 22 (for yt-dlp JS Challenge Solver)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Set up FFmpeg
+        uses: FedericoCarboni/setup-ffmpeg@v3
+
+      - name: Install Dependencies
+        run: |
+          pip install --upgrade pip
+          pip install pillow numpy scipy google-api-python-client google-auth-oauthlib google-auth-httplib2 yt-dlp edge-tts opencv-python-headless
+
+      - name: Auto-Hunt, Slice & Publish GTA Short
+        env:
+          YT_CLIENT_ID_CH2: ${{ secrets.YT_CLIENT_ID_CH2 }}
+          YT_CLIENT_SECRET_CH2: ${{ secrets.YT_CLIENT_SECRET_CH2 }}
+          YT_REFRESH_TOKEN_CH2: ${{ secrets.YT_REFRESH_TOKEN_CH2 }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          META_PAGE_TOKEN: ${{ secrets.META_PAGE_TOKEN }}
+          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+        run: |
+          echo "=== RUNNING VICE CITY PULSE AUTONOMOUS GTA CLIPPER ==="
+          EXTRA_ARGS=""
+          if [ "${{ github.event.inputs.upload_to_youtube }}" = "false" ]; then
+            EXTRA_ARGS="--no-upload"
+          fi
+          if [ -n "${{ github.event.inputs.custom_stream_url }}" ]; then
+            python gta_speed_stream_clipper.py "${{ github.event.inputs.custom_stream_url }}" $EXTRA_ARGS
+          else
+            python gta_speed_stream_clipper.py $EXTRA_ARGS
+          fi
+
+      - name: Commit and Persist GTA Clip History
+        if: always()
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add history_channel2_clips.json || true
+          git commit -m "Auto-persist Vice City Pulse clip history [skip ci]" || echo "No history changes to commit"
+          git pull --rebase origin main || true
+          git push origin main || echo "Push skipped"
+
+      - name: Archive GTA Short Output
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: vice-city-pulse-gta-short
+          path: |
+            output_channel2/*.mp4
+            history_channel2_clips.json
+          retention-days: 7

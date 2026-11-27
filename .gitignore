@@ -1,0 +1,25 @@
+# Ignore secrets and credentials
+*token*.json
+*secret*.json
+*.env
+*.pem
+*.key
+permanent_page_token.txt
+
+# Ignore build artifacts and media files
+history_build/
+doc_build/
+out/
+*.mp4
+*.wav
+*.mp3
+*.zip
+*.tar.gz
+
+# Python cache
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# WhatsApp sessions
+whatsapp_session/

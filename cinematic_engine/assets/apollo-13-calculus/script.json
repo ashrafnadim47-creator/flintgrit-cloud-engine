@@ -1,0 +1,218 @@
+{
+  "title": "Apollo 13: The Cold Calculus",
+  "thumb_hook_top": "200,000 MILES",
+  "thumb_hook_bottom": "FROM HOME",
+  "thumb_color": [
+    255,
+    60,
+    60
+  ],
+  "thumb_badge": "NASA DECLASSIFIED DOSSIER",
+  "thumb_sub_pill": "APRIL 13, 1970 \u2022 OXYGEN TANK EXPLOSION",
+  "takes": [
+    {
+      "take": "T01_scene_1",
+      "lines": [
+        {
+          "id": 1,
+          "text": "On April 11th, 1970, Apollo 13 lifted off from Kennedy Space Center on what was intended to be humanity's third landing on the lunar surface.",
+          "spoken": "On April 11th, 1970, Apollo 13 lifted off from Kennedy Space Center on what was intended to be humanity's third landing on the lunar surface.",
+          "hero": "archival photograph lands; APRIL 11, 1970 \u2022 LAUNCH",
+          "typed": "APRIL 11, 1970 \u2022 LAUNCH"
+        }
+      ]
+    },
+    {
+      "take": "T02_scene_2",
+      "lines": [
+        {
+          "id": 2,
+          "text": "Commanded by veteran astronaut Jim Lovell alongside command module pilot Jack Swigert and lunar module pilot Fred Haise, the mission began without incident.",
+          "spoken": "Commanded by veteran astronaut Jim Lovell alongside command module pilot Jack Swigert and lunar module pilot Fred Haise, the mission began without incident.",
+          "hero": "archival photograph lands; CREW \u2022 LOVELL, SWIGERT, HAISE",
+          "typed": "CREW \u2022 LOVELL, SWIGERT, HAISE"
+        }
+      ]
+    },
+    {
+      "take": "T03_scene_3",
+      "lines": [
+        {
+          "id": 3,
+          "text": "Two days later, on the evening of April 13th, the spacecraft was coasting smoothly two hundred thousand miles from Earth.",
+          "spoken": "Two days later, on the evening of April 13th, the spacecraft was coasting smoothly two hundred thousand miles from Earth.",
+          "hero": "archival photograph lands; APRIL 13 \u2022 200,000 MILES OUT",
+          "typed": "APRIL 13 \u2022 200,000 MILES OUT"
+        }
+      ]
+    },
+    {
+      "take": "T04_scene_4",
+      "lines": [
+        {
+          "id": 4,
+          "text": "At 55 hours and 54 minutes into the flight, mission controller Sy Liebergot noticed low pressure in a hydrogen tank and asked the crew to stir their cryogenic tanks.",
+          "spoken": "At 55 hours and 54 minutes into the flight, mission controller Sy Liebergot noticed low pressure in a hydrogen tank and asked the crew to stir their cryogenic tanks.",
+          "hero": "archival photograph lands; ROUTINE CRYOGENIC STIR",
+          "typed": "ROUTINE CRYOGENIC STIR"
+        }
+      ]
+    },
+    {
+      "take": "T05_scene_5",
+      "lines": [
+        {
+          "id": 5,
+          "text": "Jack Swigert reached up to the main panel and flipped the fan switches in Oxygen Tank Number Two.",
+          "spoken": "Jack Swigert reached up to the main panel and flipped the fan switches in Oxygen Tank Number Two.",
+          "hero": "archival photograph lands; SWITCH ACTIVATED",
+          "typed": "SWITCH ACTIVATED"
+        }
+      ]
+    },
+    {
+      "take": "T06_scene_6",
+      "lines": [
+        {
+          "id": 6,
+          "text": "Deep inside the tank, teflon-insulated wiring that had been subtly damaged during pre-flight testing produced a sudden electrical spark in pure liquid oxygen.",
+          "spoken": "Deep inside the tank, teflon-insulated wiring that had been subtly damaged during pre-flight testing produced a sudden electrical spark in pure liquid oxygen.",
+          "hero": "archival photograph lands; THE SPARK",
+          "typed": "THE SPARK"
+        }
+      ]
+    },
+    {
+      "take": "T07_scene_7",
+      "lines": [
+        {
+          "id": 7,
+          "text": "A violent pressure pulse blew off an outer access door. An explosion ripped through the side of the Service Module into the vacuum of space.",
+          "spoken": "A violent pressure pulse blew off an outer access door. An explosion ripped through the side of the Service Module into the vacuum of space.",
+          "hero": "archival photograph lands; EXPLOSION DETECTED",
+          "typed": "EXPLOSION DETECTED"
+        }
+      ]
+    },
+    {
+      "take": "T08_scene_8",
+      "lines": [
+        {
+          "id": 8,
+          "text": "Moments later, Jack Swigert radioed back to Houston the historic words: 'Houston, we've had a problem here.'",
+          "spoken": "Moments later, Jack Swigert radioed back to Houston the historic words: 'Houston, we've had a problem here.'",
+          "hero": "archival photograph lands; HOUSTON, WE'VE HAD A PROBLEM",
+          "typed": "HOUSTON, WE'VE HAD A PROBLEM"
+        }
+      ]
+    },
+    {
+      "take": "T09_scene_9",
+      "lines": [
+        {
+          "id": 9,
+          "text": "Looking out of the hatch window, Jim Lovell confirmed the nightmare: a gas was actively venting in high volume from the side of their spacecraft.",
+          "spoken": "Looking out of the hatch window, Jim Lovell confirmed the nightmare: a gas was actively venting in high volume from the side of their spacecraft.",
+          "hero": "archival photograph lands; VENTING INTO THE VOID",
+          "typed": "VENTING INTO THE VOID"
+        }
+      ]
+    },
+    {
+      "take": "T10_scene_10",
+      "lines": [
+        {
+          "id": 10,
+          "text": "Oxygen Tank 2 was completely destroyed, and Tank 1 was rapidly leaking down to zero. The Command Module Odyssey was losing all electrical power and dying.",
+          "spoken": "Oxygen Tank 2 was completely destroyed, and Tank 1 was rapidly leaking down to zero. The Command Module Odyssey was losing all electrical power and dying.",
+          "hero": "archival photograph lands; COMMAND MODULE FAILING",
+          "typed": "COMMAND MODULE FAILING"
+        }
+      ]
+    },
+    {
+      "take": "T11_scene_11",
+      "lines": [
+        {
+          "id": 11,
+          "text": "Lead flight director Gene Kranz and his team realized the Moon landing was impossible. The only priority was keeping three men alive.",
+          "spoken": "Lead flight director Gene Kranz and his team realized the Moon landing was impossible. The only priority was keeping three men alive.",
+          "hero": "archival photograph lands; GENE KRANZ \u2022 FAILURE IS NOT AN OPTION",
+          "typed": "GENE KRANZ \u2022 FAILURE IS NOT AN OPTION"
+        }
+      ]
+    },
+    {
+      "take": "T12_scene_12",
+      "lines": [
+        {
+          "id": 12,
+          "text": "The crew had minutes to power up the Lunar Module Aquarius, transforming a craft designed for two men for two days into a life raft for three.",
+          "spoken": "The crew had minutes to power up the Lunar Module Aquarius, transforming a craft designed for two men for two days into a life raft for three.",
+          "hero": "archival photograph lands; AQUARIUS \u2022 THE LIFE RAFT",
+          "typed": "AQUARIUS \u2022 THE LIFE RAFT"
+        }
+      ]
+    },
+    {
+      "take": "T13_scene_13",
+      "lines": [
+        {
+          "id": 13,
+          "text": "To conserve power for atmospheric reentry, Odyssey was completely shut down. The temperature inside Aquarius plummeted to three degrees Celsius.",
+          "spoken": "To conserve power for atmospheric reentry, Odyssey was completely shut down. The temperature inside Aquarius plummeted to three degrees Celsius.",
+          "hero": "archival photograph lands; FREEZING DARKNESS",
+          "typed": "FREEZING DARKNESS"
+        }
+      ]
+    },
+    {
+      "take": "T14_scene_14",
+      "lines": [
+        {
+          "id": 14,
+          "text": "Carbon dioxide levels rose to lethal thresholds, forcing engineers on Earth to invent an adapter using cardboard flight manuals, plastic bags, and duct tape.",
+          "spoken": "Carbon dioxide levels rose to lethal thresholds, forcing engineers on Earth to invent an adapter using cardboard flight manuals, plastic bags, and duct tape.",
+          "hero": "archival photograph lands; DUCT TAPE & CARDBOARD",
+          "typed": "DUCT TAPE & CARDBOARD"
+        }
+      ]
+    },
+    {
+      "take": "T15_scene_15",
+      "lines": [
+        {
+          "id": 15,
+          "text": "A critical engine burn around the far side of the moon slingshot Apollo 13 onto a free-return trajectory back toward Earth.",
+          "spoken": "A critical engine burn around the far side of the moon slingshot Apollo 13 onto a free-return trajectory back toward Earth.",
+          "hero": "archival photograph lands; FREE RETURN TRAJECTORY",
+          "typed": "FREE RETURN TRAJECTORY"
+        }
+      ]
+    },
+    {
+      "take": "T16_scene_16",
+      "lines": [
+        {
+          "id": 16,
+          "text": "Four days of bone-chilling cold, dehydration, and razor-thin mathematical calculations culminated in a flawless reentry into the Pacific Ocean.",
+          "spoken": "Four days of bone-chilling cold, dehydration, and razor-thin mathematical calculations culminated in a flawless reentry into the Pacific Ocean.",
+          "hero": "archival photograph lands; APRIL 17 \u2022 PACIFIC REENTRY",
+          "typed": "APRIL 17 \u2022 PACIFIC REENTRY"
+        }
+      ]
+    },
+    {
+      "take": "T17_scene_17",
+      "lines": [
+        {
+          "id": 17,
+          "text": "What should have been NASA's greatest disaster became humanity's most extraordinary triumph of engineering and human will.",
+          "spoken": "What should have been NASA's greatest disaster became humanity's most extraordinary triumph of engineering and human will.",
+          "hero": "archival photograph lands; SUCCESSFUL FAILURE",
+          "typed": "SUCCESSFUL FAILURE"
+        }
+      ]
+    }
+  ]
+}

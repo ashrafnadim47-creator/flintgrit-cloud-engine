@@ -1,0 +1,59 @@
+﻿name: Daily AI Geek Documentary
+
+
+on:
+  schedule:
+    # Shaam ko 05:00 PM IST (11:30 UTC) daily - AI Geek Documentary (Subah Short aur Shaam ko Documentary, koi clash nahi!)
+    - cron: "30 11 * * *"
+  workflow_dispatch:
+    inputs:
+      tts_voice:
+        description: "edge-tts voice (en-US-AndrewNeural or hi-IN-MadhurNeural)"
+        required: false
+        default: "en-US-AndrewNeural"
+
+
+jobs:
+  build-and-upload:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+
+
+      - name: Install Python dependencies
+        run: |
+          pip install --upgrade pip
+          pip install edge-tts numpy pillow scipy requests google-api-python-client google-auth-oauthlib opencv-python-headless
+
+
+      - name: Run AI Geek Documentary pipeline
+        env:
+          DRIVE_BRIDGE_URL: ${{ secrets.DOC_DRIVE_BRIDGE_URL || secrets.DRIVE_BRIDGE_URL }}
+          DRIVE_BRIDGE_SECRET: ${{ secrets.DOC_DRIVE_BRIDGE_SECRET || secrets.DRIVE_BRIDGE_SECRET }}
+          TTS_VOICE: ${{ github.event.inputs.tts_voice || 'en-US-AndrewNeural' }}
+          YT_CLIENT_ID: ${{ secrets.CHRONICLE_CLIENT_ID || secrets.YT_CLIENT_ID_DOC || secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.CHRONICLE_CLIENT_SECRET || secrets.YT_CLIENT_SECRET_DOC || secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.CHRONICLE_REFRESH_TOKEN || secrets.YT_REFRESH_TOKEN_DOC || secrets.YT_REFRESH_TOKEN }}
+          DRIVE_REFRESH_TOKEN: ${{ secrets.DRIVE_REFRESH_TOKEN || secrets.CHRONICLE_REFRESH_TOKEN || secrets.YT_REFRESH_TOKEN }}
+          DOC_DRIVE_FOLDER_ID: ${{ secrets.DOC_DRIVE_FOLDER_ID || '1KfsTib0zr1vRYJc_xEXjNod8hyReCa0e' }}
+          META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN || secrets.META_PAGE_TOKEN }}
+          META_PAGE_TOKEN: ${{ secrets.META_PAGE_TOKEN || secrets.META_ACCESS_TOKEN }}
+          FACEBOOK_PAGE_ID: ${{ secrets.FACEBOOK_PAGE_ID || secrets.FB_PAGE_ID }}
+          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID || secrets.FACEBOOK_PAGE_ID }}
+          INSTAGRAM_ACCOUNT_ID: ${{ secrets.INSTAGRAM_ACCOUNT_ID || secrets.IG_USER_ID }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID || secrets.INSTAGRAM_ACCOUNT_ID }}
+        run: python3 auto_documentary.py

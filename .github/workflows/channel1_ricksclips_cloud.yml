@@ -1,0 +1,109 @@
+name: Channel 1 - Shadow Will RicksClips Cloud Producer
+
+on:
+  schedule:
+    # Runs daily at 11:30 UTC (5:00 PM IST) to produce and auto-publish at peak evening hours
+    - cron: '30 11 * * *'
+  workflow_dispatch:
+    inputs:
+      short_number:
+        description: 'Short number to produce (or "auto" for next)'
+        required: true
+        default: 'auto'
+      upload_to_youtube:
+        description: 'Publish directly to YouTube'
+        required: true
+        default: 'false'
+
+jobs:
+  produce_ricksclip:
+    runs-on: windows-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Verify or Install FFmpeg
+        shell: powershell
+        run: |
+          if (-not (Get-Command ffmpeg -ErrorAction SilentlyContinue)) {
+            choco install ffmpeg -y
+          }
+          ffmpeg -version
+
+      - name: Install Python Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install edge-tts faster-whisper numpy scipy google-api-python-client google-auth-oauthlib google-auth-httplib2
+
+      - name: Cache npm modules
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('ricksclips_cloud/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install Node Dependencies
+        working-directory: ricksclips_cloud
+        run: |
+          npm install
+
+      - name: Run Cloud RicksClips Producer
+        shell: powershell
+        env:
+          PYTHONIOENCODING: 'utf-8'
+          PYTHONUTF8: '1'
+          RICKSCLIPS_BROWSER: 'C:\Program Files\Google\Chrome\Application\chrome.exe'
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          META_PAGE_TOKEN: ${{ secrets.META_PAGE_TOKEN }}
+          META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN || secrets.META_PAGE_TOKEN }}
+          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+        run: |
+          $shortNum = if ("${{ github.event.inputs.short_number }}" -ne "") { "${{ github.event.inputs.short_number }}" } else { "auto" }
+          $shouldUpload = if ("${{ github.event.inputs.upload_to_youtube }}" -eq "true" -or "${{ github.event_name }}" -eq "schedule") { $true } else { $false }
+          if ($shouldUpload) {
+            python ricksclips_cloud/cloud_runner.py --short $shortNum
+          } else {
+            python ricksclips_cloud/cloud_runner.py --short $shortNum --no-upload
+          }
+
+      - name: Persist Shadow Will Topic History
+        if: always()
+        shell: powershell
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add history_shadow_will.json
+          $dirty = git status --porcelain
+          if ($dirty) {
+            git commit -m "Auto-record Shadow Will Gemini story history [skip ci]"
+            git pull --rebase origin main
+            git push origin main
+          }
+        continue-on-error: true
+
+      - name: Upload Video Artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: short-${{ github.event.inputs.short_number || 'auto' }}-final
+          path: ricksclips_cloud/current_short/final.mp4
+          if-no-files-found: ignore

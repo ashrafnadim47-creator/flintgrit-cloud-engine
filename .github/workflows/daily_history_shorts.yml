@@ -1,0 +1,53 @@
+name: Daily History Shorts Apps Script & YouTube Pipeline
+
+on:
+  schedule:
+    # 08:25 AM IST (02:55 UTC) -> Generate voiceover.mp3 from script.txt
+    - cron: "55 2 * * *"
+    # 09:15 AM IST (03:45 UTC) -> Upload final_short.mp4 to YouTube
+    - cron: "45 3 * * *"
+  workflow_dispatch:
+    inputs:
+      tts_voice:
+        description: "edge-tts voice (default: en-US-ChristopherNeural)"
+        required: false
+        default: "en-US-ChristopherNeural"
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+
+      - name: Install Python dependencies
+        run: |
+          pip install --upgrade pip
+          pip install edge-tts opencv-python-headless numpy pillow scipy requests google-api-python-client google-auth-oauthlib google-auth
+
+      - name: Run History Shorts Automation
+        env:
+          DRIVE_BRIDGE_URL: ${{ secrets.DRIVE_BRIDGE_URL }}
+          DRIVE_BRIDGE_SECRET: ${{ secrets.DRIVE_BRIDGE_SECRET }}
+          TTS_VOICE: ${{ github.event.inputs.tts_voice || 'en-US-ChristopherNeural' }}
+          YT_CLIENT_ID: ${{ secrets.CHRONICLE_CLIENT_ID || secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.CHRONICLE_CLIENT_SECRET || secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.CHRONICLE_REFRESH_TOKEN || secrets.YT_REFRESH_TOKEN }}
+          META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN || secrets.META_PAGE_TOKEN }}
+          META_PAGE_TOKEN: ${{ secrets.META_PAGE_TOKEN || secrets.META_ACCESS_TOKEN }}
+          INSTAGRAM_ACCOUNT_ID: ${{ secrets.INSTAGRAM_ACCOUNT_ID || secrets.IG_USER_ID }}
+          FACEBOOK_PAGE_ID: ${{ secrets.FACEBOOK_PAGE_ID || secrets.FB_PAGE_ID }}
+          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID || secrets.FACEBOOK_PAGE_ID }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID || secrets.INSTAGRAM_ACCOUNT_ID }}
+        run: python3 auto_history_short.py

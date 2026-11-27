@@ -1,0 +1,211 @@
+[
+ {
+  "id": 1,
+  "take": "T01_cold_open",
+  "start": 0.152,
+  "end": 6.591,
+  "speech_s": 4.24,
+  "letters": 60,
+  "lps": 14.16,
+  "text": "December 17th, 1903. A windy beach in North Carolina.",
+  "flag": false
+ },
+ {
+  "id": 2,
+  "take": "T01_cold_open",
+  "start": 6.591,
+  "end": 11.11,
+  "speech_s": 2.66,
+  "letters": 37,
+  "lps": 13.89,
+  "text": "A machine of spruce and cloth leaves the sand.",
+  "flag": false
+ },
+ {
+  "id": 3,
+  "take": "T01_cold_open",
+  "start": 11.11,
+  "end": 16.346,
+  "speech_s": 2.4,
+  "letters": 36,
+  "lps": 15.0,
+  "text": "Twelve seconds. One hundred and twenty feet.",
+  "flag": false
+ },
+ {
+  "id": 4,
+  "take": "T01_cold_open",
+  "start": 16.346,
+  "end": 20.299,
+  "speech_s": 2.97,
+  "letters": 46,
+  "lps": 15.51,
+  "text": "The man who took this picture had never taken one before.",
+  "flag": false
+ },
+ {
+  "id": 5,
+  "take": "T02_dayton",
+  "start": 0.199,
+  "end": 5.422,
+  "speech_s": 3.95,
+  "letters": 54,
+  "lps": 13.67,
+  "text": "Four years earlier, two brothers ran a bicycle shop in Dayton, Ohio.",
+  "flag": false
+ },
+ {
+  "id": 6,
+  "take": "T02_dayton",
+  "start": 5.422,
+  "end": 11.41,
+  "speech_s": 3.12,
+  "letters": 50,
+  "lps": 16.04,
+  "text": "Wilbur and Orville Wright. Neither had a high school diploma.",
+  "flag": false
+ },
+ {
+  "id": 7,
+  "take": "T02_dayton",
+  "start": 11.41,
+  "end": 17.889,
+  "speech_s": 4.37,
+  "letters": 73,
+  "lps": 16.69,
+  "text": "In 1899, Wilbur wrote to the Smithsonian for everything it had on flight.",
+  "flag": false
+ },
+ {
+  "id": 8,
+  "take": "T02_dayton",
+  "start": 17.889,
+  "end": 21.828,
+  "speech_s": 2.75,
+  "letters": 34,
+  "lps": 12.36,
+  "text": "I am an enthusiast, he wrote, but not a crank.",
+  "flag": false
+ },
+ {
+  "id": 9,
+  "take": "T03_the_rival",
+  "start": 0.172,
+  "end": 5.832,
+  "speech_s": 4.27,
+  "letters": 65,
+  "lps": 15.23,
+  "text": "The man in charge there, Samuel Langley, was building a flying machine of his own.",
+  "flag": false
+ },
+ {
+  "id": 10,
+  "take": "T03_the_rival",
+  "start": 5.832,
+  "end": 10.257,
+  "speech_s": 2.57,
+  "letters": 43,
+  "lps": 16.71,
+  "text": "The War Department gave him fifty thousand dollars.",
+  "flag": false
+ },
+ {
+  "id": 11,
+  "take": "T03_the_rival",
+  "start": 10.257,
+  "end": 18.576,
+  "speech_s": 5.78,
+  "letters": 97,
+  "lps": 16.78,
+  "text": "On October 7th, 1903, it launched from a houseboat on the Potomac, and dropped straight into the river.",
+  "flag": false
+ },
+ {
+  "id": 12,
+  "take": "T03_the_rival",
+  "start": 18.576,
+  "end": 25.863,
+  "speech_s": 5.19,
+  "letters": 78,
+  "lps": 15.02,
+  "text": "Two days later, The New York Times said a real flying machine might take one to ten million years.",
+  "flag": false
+ },
+ {
+  "id": 13,
+  "take": "T03_the_rival",
+  "start": 25.863,
+  "end": 32.839,
+  "speech_s": 3.78,
+  "letters": 52,
+  "lps": 13.74,
+  "text": "On December 8th, Langley tried again. Same river. Same result.",
+  "flag": false
+ },
+ {
+  "id": 14,
+  "take": "T04_kitty_hawk",
+  "start": 0.155,
+  "end": 4.418,
+  "speech_s": 3.02,
+  "letters": 49,
+  "lps": 16.21,
+  "text": "Nine days later, the Wright brothers were back on that beach.",
+  "flag": false
+ },
+ {
+  "id": 15,
+  "take": "T04_kitty_hawk",
+  "start": 4.418,
+  "end": 9.157,
+  "speech_s": 2.88,
+  "letters": 47,
+  "lps": 16.3,
+  "text": "Their whole effort had cost less than a thousand dollars.",
+  "flag": false
+ },
+ {
+  "id": 16,
+  "take": "T04_kitty_hawk",
+  "start": 9.157,
+  "end": 16.343,
+  "speech_s": 4.16,
+  "letters": 55,
+  "lps": 13.23,
+  "text": "Orville flew first. By noon, Wilbur stayed up for fifty-nine seconds.",
+  "flag": false
+ },
+ {
+  "id": 17,
+  "take": "T04_kitty_hawk",
+  "start": 16.343,
+  "end": 24.163,
+  "speech_s": 3.86,
+  "letters": 54,
+  "lps": 14.0,
+  "text": "They wired their father: Success. Four flights. Home for Christmas.",
+  "flag": false
+ },
+ {
+  "id": 18,
+  "take": "T05_close",
+  "start": 0.163,
+  "end": 4.764,
+  "speech_s": 3.33,
+  "letters": 58,
+  "lps": 17.42,
+  "text": "The government spent fifty thousand dollars, and got a wreck in a river.",
+  "flag": false
+ },
+ {
+  "id": 19,
+  "take": "T05_close",
+  "start": 4.764,
+  "end": 9.501,
+  "speech_s": 3.47,
+  "letters": 53,
+  "lps": 15.28,
+  "text": "Two bicycle mechanics spent less than a thousand, and got the sky.",
+  "flag": false
+ }
+]

@@ -1,0 +1,65 @@
+{
+  "title": "The Ghost Ship Mary Celeste",
+  "takes": [
+    {
+      "take": "T01_scene_1",
+      "lines": [
+        {
+          "id": 1,
+          "text": "December 4th, 1872. The British brigantine Dei Gratia spots a ship drifting aimlessly off the Azores.",
+          "spoken": "December 4th, 1872. The British brigantine Dei Gratia spots a ship drifting aimlessly off the Azores.",
+          "hero": "archival photograph lands; DECEMBER 4, 1872 \u2022 ATLANTIC OCEAN",
+          "typed": "DECEMBER 4, 1872 \u2022 ATLANTIC OCEAN"
+        }
+      ]
+    },
+    {
+      "take": "T02_scene_2",
+      "lines": [
+        {
+          "id": 2,
+          "text": "It was the Mary Celeste. Her sails were set, and her cargo of industrial alcohol was intact.",
+          "spoken": "It was the Mary Celeste. Her sails were set, and her cargo of industrial alcohol was intact.",
+          "hero": "archival photograph lands; MERCHANT SHIP \u2022 MARY CELESTE",
+          "typed": "MERCHANT SHIP \u2022 MARY CELESTE"
+        }
+      ]
+    },
+    {
+      "take": "T03_scene_3",
+      "lines": [
+        {
+          "id": 3,
+          "text": "When crewmen boarded, they found warm tea, untouched personal belongings, and a ticking clock.",
+          "spoken": "When crewmen boarded, they found warm tea, untouched personal belongings, and a ticking clock.",
+          "hero": "archival photograph lands; ABANDONED IN HASTE",
+          "typed": "ABANDONED IN HASTE"
+        }
+      ]
+    },
+    {
+      "take": "T04_scene_4",
+      "lines": [
+        {
+          "id": 4,
+          "text": "Captain Benjamin Briggs, his wife, his two-year-old daughter, and seven crewmen had vanished.",
+          "spoken": "Captain Benjamin Briggs, his wife, his two-year-old daughter, and seven crewmen had vanished.",
+          "hero": "archival photograph lands; TEN SOULS MISSING",
+          "typed": "TEN SOULS MISSING"
+        }
+      ]
+    },
+    {
+      "take": "T05_scene_5",
+      "lines": [
+        {
+          "id": 5,
+          "text": "To this day, not a single trace of them has ever been found.",
+          "spoken": "To this day, not a single trace of them has ever been found.",
+          "hero": "archival photograph lands; THE GREATEST MARITIME MYSTERY",
+          "typed": "THE GREATEST MARITIME MYSTERY"
+        }
+      ]
+    }
+  ]
+}

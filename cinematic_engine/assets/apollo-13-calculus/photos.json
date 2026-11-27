@@ -1,0 +1,34 @@
+{
+  "photos": [
+    {
+      "id": "P01",
+      "kind": "photo",
+      "commons": "File:View of damaged Apollo 13 Service Module from the Lunar-Command Modules (as13-59-8500).jpg"
+    },
+    {
+      "id": "P02",
+      "kind": "photo",
+      "commons": "File:Jim Lovell (2).jpg"
+    },
+    {
+      "id": "P03",
+      "kind": "photo",
+      "commons": "File:Apollo 13 Mailbox at Mission Control.jpg"
+    },
+    {
+      "id": "P04",
+      "kind": "photo",
+      "commons": "File:Apollo 13 LM undocking (AS13-59-8566) (cropped).jpg"
+    },
+    {
+      "id": "P05",
+      "kind": "photo",
+      "commons": "File:Eugene F. Kranz at his console at the NASA Mission Control Center.jpg"
+    },
+    {
+      "id": "P06",
+      "kind": "photo",
+      "commons": "File:Apollo 13 crew recovery after splashdown S70-35610.jpg"
+    }
+  ]
+}

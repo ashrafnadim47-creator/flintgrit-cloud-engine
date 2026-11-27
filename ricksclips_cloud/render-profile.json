@@ -1,0 +1,12 @@
+{
+  "fingerprint": "cloud-profile",
+  "probe": {
+    "gl": "angle",
+    "renderer": "Direct3D11",
+    "hardware": true,
+    "ok2k": false,
+    "ms2k": 1000,
+    "error": null
+  },
+  "at": "2026-11-20T15:00:00.000Z"
+}

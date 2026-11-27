@@ -1,0 +1,80 @@
+name: Channel 3 - Flint & Grit Daily Procedural Shorts (6:30 PM IST)
+
+on:
+  schedule:
+    # 6:30 PM IST = 13:00 UTC daily
+    - cron: '0 13 * * *'
+  workflow_dispatch:
+    inputs:
+      custom_topic:
+        description: 'Optional topic ID (e.g. kitchen_oil_fire, gas_cylinder_leak, electric_shock_safety, elevator_fall_stuck, street_dog_chase)'
+        required: false
+        default: ''
+      upload_to_youtube:
+        description: 'Publish to YouTube (Disabled until Channel 3 API is provided)'
+        required: false
+        default: 'false'
+
+jobs:
+  produce_flintgrit_short:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Set up FFmpeg
+        uses: FedericoCarboni/setup-ffmpeg@v3
+
+      - name: Install System Fonts & Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-dejavu fonts-freefont-ttf
+          pip install --upgrade pip
+          pip install pillow edge-tts google-api-python-client google-auth-oauthlib google-auth-httplib2
+
+      - name: Auto-Produce 12-Second Procedural 2D Short
+        env:
+          YT_CLIENT_ID_CH3: ${{ secrets.YT_CLIENT_ID_CH3 }}
+          YT_CLIENT_SECRET_CH3: ${{ secrets.YT_CLIENT_SECRET_CH3 }}
+          YT_REFRESH_TOKEN_CH3: ${{ secrets.YT_REFRESH_TOKEN_CH3 }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          echo "=== RUNNING FLINT & GRIT AUTONOMOUS 12-SECOND PRODUCER ==="
+          EXTRA_ARGS="--no-upload"
+          if [ "${{ github.event.inputs.upload_to_youtube }}" = "true" ]; then
+            EXTRA_ARGS="--upload"
+          fi
+          if [ -n "${{ github.event.inputs.custom_topic }}" ]; then
+            python flintgrit_producer.py --topic "${{ github.event.inputs.custom_topic }}" $EXTRA_ARGS
+          else
+            python flintgrit_producer.py $EXTRA_ARGS
+          fi
+
+      - name: Commit and Persist Flint & Grit History
+        if: always()
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add history_flintgrit.json || true
+          git commit -m "Auto-persist Flint & Grit history [skip ci]" || echo "No history changes to commit"
+          git pull --rebase origin main || true
+          git push origin main || echo "Push skipped"
+
+      - name: Archive Flint & Grit Shorts Output
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: flint-grit-12s-short
+          path: |
+            output_channel3/*.mp4
+            output_channel3/*_contact.jpg
+            history_flintgrit.json
+          retention-days: 14
