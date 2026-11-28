@@ -1,20 +1,17 @@
-name: Channel 1 - Shadow Will (Subah Short & Shaam Long-Form)
+name: Channel 1 - Shadow Will Daily 3D Merged Animation
 
 on:
   schedule:
-    # Subah 08:30 AM IST (03:00 UTC) - Viral 9:16 Short (Psychology / Inner Enemy / 3D Story)
+    # Daily 08:30 AM IST (03:00 UTC) - Viral 9:16 Merged 3D+2D Story Short
     - cron: '0 3 * * *'
-    # Shaam 06:30 PM IST (13:00 UTC) - High-Retention Long-Form Animated Film (Kaz Deep Psychological Story)
-    - cron: '0 13 * * *'
   workflow_dispatch:
     inputs:
       format:
-        description: 'Format to produce (short or long or auto)'
+        description: 'Format to produce (short or long)'
         required: true
-        default: 'auto'
+        default: 'short'
         type: choice
         options:
-          - auto
           - short
           - long
 

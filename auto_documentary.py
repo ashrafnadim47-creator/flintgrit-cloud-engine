@@ -26,9 +26,17 @@ def bridge_params(extra=None):
 
 
 def list_drive_files():
-    resp = requests.get(BRIDGE_URL, params=bridge_params({"action": "list"}), timeout=60)
-    resp.raise_for_status()
-    return resp.json().get("files", [])
+    if not BRIDGE_URL:
+        print("[AutoDoc] Notice: DRIVE_BRIDGE_URL is not set.", flush=True)
+        return []
+    try:
+        resp = requests.get(BRIDGE_URL, params=bridge_params({"action": "list"}), timeout=60)
+        resp.raise_for_status()
+        data = resp.json()
+        return data.get("files", [])
+    except Exception as e:
+        print(f"[AutoDoc] Notice when querying Drive Bridge: {e}", flush=True)
+        return []
 
 
 def download_drive_file(name: str, dest: Path):
