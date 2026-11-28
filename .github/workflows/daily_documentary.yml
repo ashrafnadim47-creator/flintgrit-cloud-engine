@@ -17,6 +17,8 @@ on:
 jobs:
   build-and-upload:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     timeout-minutes: 120
     steps:
       - name: Checkout repository
@@ -58,3 +60,13 @@ jobs:
           INSTAGRAM_ACCOUNT_ID: ${{ secrets.INSTAGRAM_ACCOUNT_ID || secrets.IG_USER_ID }}
           IG_USER_ID: ${{ secrets.IG_USER_ID || secrets.INSTAGRAM_ACCOUNT_ID }}
         run: python3 auto_documentary.py
+
+      - name: Commit and Persist Documentary History
+        if: always()
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add history_documentary.json || true
+          git commit -m "Auto-persist Documentary history [skip ci]" || echo "No history changes to commit"
+          git pull --rebase origin main || true
+          git push origin main || echo "Push skipped"

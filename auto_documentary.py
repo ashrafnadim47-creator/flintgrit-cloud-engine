@@ -18,6 +18,29 @@ TTS_VOICE = os.environ.get("TTS_VOICE", "en-US-AndrewNeural")
 WORKDIR = Path("doc_build")
 
 
+import datetime
+import hashlib
+
+HISTORY_FILE = Path("history_documentary.json")
+
+def load_doc_history():
+    if HISTORY_FILE.exists():
+        try:
+            return json.loads(HISTORY_FILE.read_text(encoding="utf-8"))
+        except Exception:
+            return []
+    return []
+
+def record_doc_history(vid_id: str, title: str, script_hash: str):
+    history = load_doc_history()
+    history.append({
+        "video_id": vid_id,
+        "title": title,
+        "script_hash": script_hash,
+        "uploaded_at": str(datetime.datetime.now(datetime.timezone.utc))
+    })
+    HISTORY_FILE.write_text(json.dumps(history[-50:], indent=2), encoding="utf-8")
+
 def bridge_params(extra=None):
     params = dict(extra or {})
     if BRIDGE_SECRET:
@@ -172,6 +195,20 @@ def main():
             continue
         download_drive_file(fname, WORKDIR / fname)
 
+    script_content = (WORKDIR / "script.txt").read_text(encoding="utf-8")
+    script_hash = hashlib.sha256(script_content.encode("utf-8")).hexdigest()[:16]
+    meta = {}
+    if (WORKDIR / "metadata.json").exists():
+        try:
+            meta = json.loads((WORKDIR / "metadata.json").read_text(encoding="utf-8"))
+        except Exception:
+            pass
+    topic_title = meta.get("title") or "AI Geek Documentary"
+    history = load_doc_history()
+    if any(h.get("script_hash") == script_hash or h.get("title") == topic_title for h in history):
+        print(f"[AutoDoc] Duplicate Detected! Topic '{topic_title}' (hash {script_hash}) was already uploaded to YouTube. Skipping to prevent duplicate upload.", flush=True)
+        sys.exit(0)
+
     vo_mp3 = WORKDIR / "voiceover.mp3"
     generate_tts(WORKDIR / "script.txt", vo_mp3)
     try:
@@ -203,8 +240,11 @@ def main():
     meta = {}
     if (WORKDIR / "metadata.json").exists():
         meta = json.loads((WORKDIR / "metadata.json").read_text(encoding="utf-8"))
+    vid_id = None
     if os.environ.get("YT_REFRESH_TOKEN"):
-        upload_to_youtube(final_mp4, meta)
+        vid_id = upload_to_youtube(final_mp4, meta)
+    if vid_id:
+        record_doc_history(vid_id, topic_title, script_hash)
 
     # Auto Cross-Post to Facebook & Instagram
     try:
