@@ -64,12 +64,12 @@ jobs:
           CURRENT_HOUR=$(date -u +%H)
           USER_FORMAT="${{ github.event.inputs.format }}"
 
-          if [ "$USER_FORMAT" = "short" ] || { [ "$USER_FORMAT" = "auto" ] && [ "$CURRENT_HOUR" -lt "8" ]; }; then
+          if [ "$USER_FORMAT" = "long" ] || { [ "$USER_FORMAT" = "auto" ] && [ "$CURRENT_HOUR" -ge "8" ]; }; then
+            echo "=== [SHAAM CYCLE] PRODUCING SHADOW WILL MERGED 3D+2D LONG-FORM FILM ==="
+            python3 shadow_will_merged/shadow_will_merged_producer.py --format long
+          else
             echo "=== [SUBAH CYCLE] PRODUCING SHADOW WILL MERGED 3D+2D SHORT ==="
             python3 shadow_will_merged/shadow_will_merged_producer.py --format short
-          else
-            echo "=== [SHAAM CYCLE] PRODUCING SHADOW WILL LONG-FORM ANIMATED FILM ==="
-            python3 kaz_story_producer.py --format long
           fi
 
       - name: Persist Shadow Will Topic History
