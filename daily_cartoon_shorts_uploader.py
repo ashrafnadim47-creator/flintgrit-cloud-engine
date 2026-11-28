@@ -96,18 +96,32 @@ def list_drive_cartoon_videos():
         return []
 
 def download_video_from_bridge(file_id: str, dest_path: Path):
-    print(f"[CartoonUploader] Downloading {dest_path.name} from Google Drive...", flush=True)
+    print(f"[CartoonUploader] Downloading {dest_path.name} from Google Drive (ID: {file_id})...", flush=True)
+    # Direct Google Drive export download
+    try:
+        direct_url = f"https://drive.google.com/uc?export=download&id={file_id}"
+        r = requests.get(direct_url, stream=True, timeout=180)
+        if r.status_code == 200:
+            with open(dest_path, "wb") as f:
+                for chunk in r.iter_content(chunk_size=65536):
+                    f.write(chunk)
+            if dest_path.stat().st_size > 1000:
+                print(f"[CartoonUploader] Direct download success: {dest_path.stat().st_size} bytes -> {dest_path}", flush=True)
+                return
+    except Exception as e:
+        print(f"[CartoonUploader] Direct download fallback triggered: {e}", flush=True)
+    
+    # Bridge fallback
     r = requests.get(
         BRIDGE_URL,
-        params={"action": "get_base64", "id": file_id},
+        params={"action": "get_base64", "id": file_id, "name": dest_path.name},
         timeout=300
     )
     r.raise_for_status()
     data = r.json()
     b64 = data.get("base64")
-    if not b64:
-        raise ValueError(f"No base64 data returned for file {file_id}")
-    dest_path.write_bytes(base64.b64decode(b64))
+    if b64:
+        dest_path.write_bytes(base64.b64decode(b64))
     print(f"[CartoonUploader] Downloaded {dest_path.stat().st_size} bytes -> {dest_path}", flush=True)
 
 def main():
