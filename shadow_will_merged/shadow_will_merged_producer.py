@@ -212,9 +212,9 @@ def main():
     )
 
     # 4. Render WebGL Frames via Playwright
-    render_frames(WEB_DIR, frames_dir, start_f=0, end_f=total_frames - 1, step=1, quality=0.94, width=width, height=height)
+    render_frames(WEB_DIR, frames_dir, start_f=0, end_f=total_frames - 1, step=1, quality=0.98, width=width, height=height)
 
-    # 5. Encode Final MP4 with Burned-in ASS Captions
+    # 5. Encode Final MP4 with Burned-in ASS Captions (High-Quality Ultra-Sharp Settings)
     out_mp4 = REPO_ROOT / f"shadow_will_{args.format}_{story['id'][:24]}.mp4"
     ass_escaped = str(ass_path).replace("\\", "/").replace(":", "\\:")
     subprocess.run(
@@ -225,8 +225,8 @@ def main():
             "-i", str(mix_wav),
             "-vf", f"ass='{ass_escaped}'",
             "-map", "0:v:0", "-map", "1:a:0",
-            "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-pix_fmt", "yuv420p",
-            "-c:a", "aac", "-b:a", "192k", "-shortest", "-movflags", "+faststart",
+            "-c:v", "libx264", "-preset", "slow", "-crf", "15", "-b:v", "8M", "-maxrate", "12M", "-bufsize", "16M", "-pix_fmt", "yuv420p",
+            "-c:a", "aac", "-b:a", "256k", "-shortest", "-movflags", "+faststart",
             str(out_mp4),
         ],
         check=True,

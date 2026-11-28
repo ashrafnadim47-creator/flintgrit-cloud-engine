@@ -1054,7 +1054,7 @@ def run_channel_2_autopilot(stream_url=None, upload=True):
         try:
             import kick_twitch_stream_slicer
             history = load_clip_history()
-            sliced = kick_twitch_stream_slicer.slice_fresh_kick_or_twitch_clip(raw_slice, history, clip_len=28)
+            sliced = kick_twitch_stream_slicer.slice_fresh_kick_or_twitch_clip(raw_slice, history, clip_len=42)
             if sliced:
                 chosen_meta, chosen_analysis, clip_uid = sliced
                 slice_downloaded = True

@@ -9,7 +9,7 @@ const _qp = new URLSearchParams(window.location.search);
 const W = parseInt(_qp.get('w') || '1080', 10), H = parseInt(_qp.get('h') || '1920', 10);
 const canvas = document.getElementById('c');
 canvas.width = W; canvas.height = H;
-const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, preserveDrawingBuffer: true });
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, preserveDrawingBuffer: true, powerPreference: 'high-performance' });
 renderer.setPixelRatio(1); renderer.setSize(W, H, false);
 renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.outputColorSpace = THREE.SRGBColorSpace;

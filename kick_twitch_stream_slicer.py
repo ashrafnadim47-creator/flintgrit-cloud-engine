@@ -127,9 +127,9 @@ def _generate_gemini_gta_metadata(channel: str, vod_title: str, source: str):
     }
 
 
-def slice_fresh_kick_or_twitch_clip(out_mp4: str, history: list, clip_len: int = 28):
+def slice_fresh_kick_or_twitch_clip(out_mp4: str, history: list, clip_len: int = 42):
     """
-    Finds an unused Twitch/Kick GTA VOD, downloads a 28s high-action slice via yt-dlp + ffmpeg,
+    Finds an unused Twitch/Kick GTA VOD, downloads a 40-45s high-action slice via yt-dlp + ffmpeg,
     and returns (meta, analysis, unique_clip_key) or None if all network sources fail.
     """
     candidates = []
@@ -161,11 +161,11 @@ def slice_fresh_kick_or_twitch_clip(out_mp4: str, history: list, clip_len: int =
     random.shuffle(pool)
 
     for cand in pool[:4]:
-        dur = max(180, cand["duration"])
-        # Pick mid-stream (35%-75%) where actual GTA gameplay happens, download 90s candidate & extract loudest 28s peak (autoclip style)
-        win_start = random.randint(int(dur * 0.35), max(int(dur * 0.35) + 10, int(dur * 0.75) - 90))
-        win_end = win_start + 90
-        tmp_90s = str(Path(out_mp4).with_name("tmp_90s_scan.mp4"))
+        dur = max(240, cand["duration"])
+        # Pick mid-stream (35%-75%) where actual GTA gameplay happens, download 120s candidate & extract loudest 42s peak (autoclip style)
+        win_start = random.randint(int(dur * 0.35), max(int(dur * 0.35) + 10, int(dur * 0.75) - 120))
+        win_end = win_start + 120
+        tmp_scan = str(Path(out_mp4).with_name("tmp_scan_vod.mp4"))
         print(f"[StreamSlicer] Scanning {cand['source'].upper()} '{cand['channel']}' ({win_start}s-{win_end}s) for peak action: {cand['title']}")
 
         cmd = [
@@ -174,18 +174,18 @@ def slice_fresh_kick_or_twitch_clip(out_mp4: str, history: list, clip_len: int =
             "-f", "best[height<=1080]/best",
             "--download-sections", f"*{win_start}-{win_end}",
             "--force-keyframes-at-cuts",
-            "-o", tmp_90s,
+            "-o", tmp_scan,
             cand["url"],
         ]
         try:
             res = subprocess.run(cmd, capture_output=True, text=True, timeout=180)
-            if res.returncode == 0 and Path(tmp_90s).exists() and Path(tmp_90s).stat().st_size > 200_000:
-                # Find loudest 28s window using ffmpeg volumedetect / astats per 10s bucket
-                best_offset = 20
+            if res.returncode == 0 and Path(tmp_scan).exists() and Path(tmp_scan).stat().st_size > 200_000:
+                # Find loudest 42s window using ffmpeg volumedetect
+                best_offset = 15
                 best_db = -99.0
-                for off in [0, 15, 30, 45, 60]:
+                for off in [0, 15, 30, 45, 60, 75]:
                     vf = subprocess.run(
-                        ["ffmpeg", "-v", "error", "-ss", str(off), "-t", "28", "-i", tmp_90s, "-af", "volumedetect", "-f", "null", "-"],
+                        ["ffmpeg", "-v", "error", "-ss", str(off), "-t", str(clip_len), "-i", tmp_scan, "-af", "volumedetect", "-f", "null", "-"],
                         capture_output=True, text=True
                     )
                     for line in vf.stderr.splitlines():
@@ -198,10 +198,10 @@ def slice_fresh_kick_or_twitch_clip(out_mp4: str, history: list, clip_len: int =
                             except Exception:
                                 pass
                 subprocess.run(
-                    ["ffmpeg", "-v", "error", "-y", "-ss", str(best_offset), "-t", str(clip_len), "-i", tmp_90s, "-c", "copy", out_mp4],
+                    ["ffmpeg", "-v", "error", "-y", "-ss", str(best_offset), "-t", str(clip_len), "-i", tmp_scan, "-c", "copy", out_mp4],
                     check=True,
                 )
-                Path(tmp_90s).unlink(missing_ok=True)
+                Path(tmp_scan).unlink(missing_ok=True)
             if Path(out_mp4).exists() and Path(out_mp4).stat().st_size > 200_000:
                 ai_meta = _generate_gemini_gta_metadata(cand["channel"], cand["title"], cand["source"])
                 meta = {

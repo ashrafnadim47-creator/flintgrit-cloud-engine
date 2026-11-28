@@ -29,7 +29,7 @@ def start_server(web_dir: Path):
     return httpd, port
 
 
-def render_frames(web_dir: Path, out_dir: Path, start_f: int = 0, end_f: int = None, step: int = 1, quality: float = 0.94, width: int = 1080, height: int = 1920):
+def render_frames(web_dir: Path, out_dir: Path, start_f: int = 0, end_f: int = None, step: int = 1, quality: float = 0.98, width: int = 1080, height: int = 1920):
     out_dir.mkdir(parents=True, exist_ok=True)
     httpd, port = start_server(web_dir)
     url = f"http://127.0.0.1:{port}/index.html"
