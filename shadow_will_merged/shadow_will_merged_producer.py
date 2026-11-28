@@ -119,7 +119,7 @@ def try_gemini_story(history: list):
         f"Write a gripping 60-word YouTube Shorts narration script (4 punchy sentences) about: {topic}. "
         "Return STRICT JSON ONLY: {\"title\": \"... #shorts\", \"description\": \"...\", \"tags\": [\"shorts\"], \"mood\": \"heist\", \"script\": \"...\"}"
     )
-    for model in ["gemini-2.5-flash", "gemini-2.0-flash"]:
+    for model in ["gemini-1.5-flash", "gemini-2.0-flash-exp", "gemini-1.5-pro"]:
         url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={api_key}"
         body = json.dumps({"contents": [{"parts": [{"text": prompt}]}]}).encode("utf-8")
         req = urllib.request.Request(url, data=body, headers={"Content-Type": "application/json"})

@@ -1,0 +1,46 @@
+name: Channel 5 - Daily Cartoon Shorts (Drive to YouTube)
+
+on:
+  schedule:
+    # Daily 09:30 AM IST (04:00 UTC)
+    - cron: '0 4 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  upload-cartoon-short:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install requests google-api-python-client google-auth-oauthlib google-auth
+
+      - name: Run Cartoon Shorts Drive Uploader
+        env:
+          DRIVE_BRIDGE_URL: ${{ secrets.DRIVE_BRIDGE_URL }}
+          CARTOON_FOLDER_ID: "1sIaO2WhNeef3g7u-_OpzOO4DJVazAQmU"
+          YT_CLIENT_ID_CH5: ${{ secrets.YT_CLIENT_ID_CH5 || secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET_CH5: ${{ secrets.YT_CLIENT_SECRET_CH5 || secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN_CH5: ${{ secrets.YT_REFRESH_TOKEN_CH5 || secrets.YT_REFRESH_TOKEN }}
+        run: python daily_cartoon_shorts_uploader.py
+
+      - name: Commit and Persist Cartoon History
+        if: always()
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add history_cartoon_shorts.json || true
+          git commit -m "Auto-persist Cartoon Shorts history [skip ci]" || echo "No history changes to commit"
+          git pull --rebase origin main || true
+          git push origin main || echo "Push skipped"

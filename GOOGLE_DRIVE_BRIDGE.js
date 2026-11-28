@@ -175,9 +175,10 @@ function doGet(e) {
   try {
     const action = (e && e.parameter && e.parameter.action) || "list";
 
-    // 1. LIST FILES IN DOCUMENTARY_AUTO FOLDER
+    // 1. LIST FILES IN SPECIFIED OR DEFAULT FOLDER
     if (action === "list") {
-      const folder = getFolder(DOC_FOLDER_ID);
+      const targetFolderId = (e && e.parameter && e.parameter.folderId) || DOC_FOLDER_ID;
+      const folder = getFolder(targetFolderId);
       const files = folder.getFiles();
       const list = [];
       while (files.hasNext()) {
@@ -192,10 +193,17 @@ function doGet(e) {
       return jsonResponse({ success: true, files: list });
     }
 
-    // 2. DOWNLOAD FILE AS BASE64 BY NAME
+    // 2. DOWNLOAD FILE AS BASE64 (BY ID OR BY NAME)
     if (action === "get_base64") {
+      const fileId = e && e.parameter && e.parameter.id;
+      if (fileId) {
+        const f = DriveApp.getFileById(fileId);
+        const b64 = Utilities.base64Encode(f.getBlob().getBytes());
+        return jsonResponse({ success: true, name: f.getName(), base64: b64 });
+      }
       const name = e.parameter.name;
-      const folder = getFolder(DOC_FOLDER_ID);
+      const targetFolderId = (e && e.parameter && e.parameter.folderId) || DOC_FOLDER_ID;
+      const folder = getFolder(targetFolderId);
       const files = folder.getFilesByName(name);
       if (files.hasNext()) {
         const f = files.next();
